@@ -1,6 +1,6 @@
 # function to collect data via the I2c protocol
 
-def readtemp(scl_pin=5, sda_pin=4):
+def readValue(scl_pin=5, sda_pin=4):
     import machine
     i2c = machine.I2C(scl=machine.Pin(scl_pin), sda=machine.Pin(sda_pin))
     byte_data = bytearray(2)
