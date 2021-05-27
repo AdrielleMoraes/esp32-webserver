@@ -62,6 +62,6 @@ def main():
             conn.close()
 
         except OSError as e:
-            s.close()
             conn.close()
             print('Connection closed')
+
