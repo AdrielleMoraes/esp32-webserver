@@ -1,0 +1,11 @@
+<h1>List of linked devices</h1>
+
+{% if user %}
+    <ul>
+    {% for device in user.esp32_set.all %}
+        <li>Status: {{device.id}}</a></li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>No devices are connected to this user.</p>
+{% endif %}
