@@ -2,9 +2,10 @@ import network
 import socket
 import ure
 import time
+import config
 
-ap_ssid = "WifiManager"
-ap_password = "password"
+ap_ssid = config.SSID
+ap_password = config.WIFI_PASSWORD 
 ap_authmode = 3  # WPA2
 
 NETWORK_PROFILES = 'wifi.dat'
@@ -159,20 +160,6 @@ def handle_root(client):
                     Be careful about security!
                 </span>
             </h5>
-            <hr />
-            <h2 style="color: #2e6c80;">
-                Some useful infos:
-            </h2>
-            <ul>
-                <li>
-                    Original code from <a href="https://github.com/cpopp/MicroPythonSamples"
-                        target="_blank" rel="noopener">cpopp/MicroPythonSamples</a>.
-                </li>
-                <li>
-                    This code available at <a href="https://github.com/tayfunulu/WiFiManager"
-                        target="_blank" rel="noopener">tayfunulu/WiFiManager</a>.
-                </li>
-            </ul>
         </html>
     """ % dict(filename=NETWORK_PROFILES))
     client.close()
@@ -197,6 +184,8 @@ def handle_configure(client, request):
         return False
 
     if do_connect(ssid, password):
+        print(ssid)
+        print(password)
         response = """\
             <html>
                 <center>
@@ -270,7 +259,7 @@ def start(port=80):
     server_socket.listen(1)
 
     print('Connect to WiFi ssid ' + ap_ssid + ', default password: ' + ap_password)
-    print('and access the ESP via your favorite web browser at 192.168.4.1.')
+    print('and access the ESP via your favorite web browser')
     print('Listening on:', addr)
 
     while True:

@@ -29,6 +29,7 @@ import run
 try:
   import usocket as socket
 except:
+  print("Importing socket instead")
   import socket
 
 wlan = wifimgr.get_connection()
