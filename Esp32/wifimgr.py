@@ -8,6 +8,7 @@ ap_ssid = config.SSID
 ap_password = config.WIFI_PASSWORD 
 ap_authmode = 3  # WPA2
 
+# todo resend code to esp32
 NETWORK_PROFILES = 'wifi.dat'
 
 wlan_ap = network.WLAN(network.AP_IF)
