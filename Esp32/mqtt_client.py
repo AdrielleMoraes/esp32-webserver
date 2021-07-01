@@ -1,6 +1,8 @@
 import paho.mqtt.client as mqtt
 import config
 
+# use this to send messages
+
 MQTT_USERNAME = config.MQTT_USERNAME
 MQTT_PASSWORD = config.MQTT_PASSWORD
 MQTT_HOST = config.MQTT_HOST
