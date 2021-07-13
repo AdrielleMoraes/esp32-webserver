@@ -1,3 +1,5 @@
+# First time connnection must connect to boards wifi 
+
 import network
 import socket
 import ure
@@ -260,7 +262,7 @@ def start(port=80):
     server_socket.listen(1)
 
     print('Connect to WiFi ssid ' + ap_ssid + ', default password: ' + ap_password)
-    print('and access the ESP via your favorite web browser')
+    print('and access the ESP via your favorite web browser at http://192.168.4.1')
     print('Listening on:', addr)
 
     while True:
