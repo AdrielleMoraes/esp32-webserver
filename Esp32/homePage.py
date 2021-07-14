@@ -40,11 +40,11 @@ def web_page(led_state="On", data=0):
     <p>LED state: <strong>""" + led_state + """</strong></p>
     <p>
         <i class="fas fa-lightbulb fa-3x" style="color:#c81919;"></i>
-        <a href=\"?led_2_on\"><button class="button">LED ON</button></a>
+        <a href=\"?on\"><button class="button">LED ON</button></a>
     </p>
     <p>
         <i class="far fa-lightbulb fa-3x" style="color:#000000;"></i>
-        <a href=\"?led_2_off\"><button class="button button1">LED OFF</button></a>
+        <a href=\"?off\"><button class="button button1">LED OFF</button></a>
     </p>
 </body>
 

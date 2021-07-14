@@ -9,7 +9,7 @@ try:
 except:
   import socket
 
-def main():
+def main(): 
     
     # set pins
     led = Pin(12, Pin.OUT)
@@ -40,8 +40,8 @@ def main():
             conn.settimeout(None)
             request = str(request)
             print('GET Rquest Content = %s' % request)
-            led_on = request.find('/?led_2_on')
-            led_off = request.find('/?led_2_off')
+            led_on = request.find('/?on')
+            led_off = request.find('/?off')
 
             if led_on == 6:
                 print('LED ON -> GPIO2')
@@ -52,6 +52,7 @@ def main():
                 print('LED OFF -> GPIO2')
                 led_state = "OFF"
                 led.value(0)
+
 
             response = homePage.web_page(data=str(distance))
 
