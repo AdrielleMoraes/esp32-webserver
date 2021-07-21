@@ -1,8 +1,3 @@
-config.py
-.venv
-
-settings.py
-
 # OSX
 #
 .DS_Store
