@@ -23,7 +23,7 @@ const App: () => Node = () => {
   return (
     <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
       <Text>
-        Hello World!
+        Hello World!?
       </Text>
     </View>
   );
