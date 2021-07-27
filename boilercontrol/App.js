@@ -1,33 +1,24 @@
 import React from 'react';
-import type {Node} from 'react';
-import {
-  SafeAreaView,
-  ScrollView,
-  StatusBar,
-  StyleSheet,
-  Text,
-  useColorScheme,
-  View,
-} from 'react-native';
-
-import {
-  Colors,
-  DebugInstructions,
-  Header,
-  LearnMoreLinks,
-  ReloadInstructions,
-} from 'react-native/Libraries/NewAppScreen';
-
-
-const App: () => Node = () => {
+import { View, Text, Image, ScrollView, TextInput } from 'react-native';
+import Cat from './Components/Cat';
+const App = () => {
   return (
-    <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
-      <Text>
-        Hello World!?
-      </Text>
-    </View>
+    <ScrollView>
+      <Text>Some text</Text>
+      <View>
+        <Text>Some more text</Text>
+        <Cat name="Furry"/>
+      </View>
+      <TextInput
+        style={{
+          height: 40,
+          borderColor: 'gray',
+          borderWidth: 1
+        }}
+        defaultValue="You can type in me"
+      />
+    </ScrollView>
   );
-};
-
+}
 
 export default App;
