@@ -8,10 +8,6 @@ const HomeScreen = ({navigation}) => {
               title="Start"
               onPress={() => navigation.navigate('Profile', {name: 'Adrielle'})}
             />
-            <Button
-              title="Sensor"
-              onPress={() => navigation.navigate('Sensor')}
-            />
       </View>
   )
 }

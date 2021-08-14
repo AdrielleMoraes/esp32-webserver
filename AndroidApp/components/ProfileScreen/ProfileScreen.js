@@ -1,5 +1,5 @@
 import React from 'react';
-import {View, Text} from 'react-native';
+import {View, Text, Button} from 'react-native';
 import {Avatar} from 'react-native-elements';
 
 const ProfileScreen = ({navigation, route}) => {
@@ -13,7 +13,10 @@ const ProfileScreen = ({navigation, route}) => {
         overlayContainerStyle={{backgroundColor: 'green'}}
       />
       <Text>This is {route.params.name}'s profile</Text>
-      <Text>Connect to Sensor</Text>
+      <Button
+              title="Sensor"
+              onPress={() => navigation.navigate('Sensor')}
+            />
       <Text>Connected sensors</Text>
     </View>
   );

@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "513863906689",
+    "project_id": "boilercontrol-iot",
+    "storage_bucket": "boilercontrol-iot.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:513863906689:android:eb476d46cde951ede46480",
+        "android_client_info": {
+          "package_name": "com.androidapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "513863906689-jim61mil054a0vthiejq70mddn6qmogm.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCvLCWNApcLOE25RaDPAvFA5In1ZkyQyH0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "513863906689-jim61mil054a0vthiejq70mddn6qmogm.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
