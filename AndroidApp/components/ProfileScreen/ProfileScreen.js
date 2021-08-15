@@ -15,7 +15,7 @@ const ProfileScreen = ({navigation, route}) => {
       <Text>This is {route.params.name}'s profile</Text>
       <Button
               title="Sensor"
-              onPress={() => navigation.navigate('Sensor')}
+              onPress={() => navigation.navigate('Sensor', {name: 'Esp32'})}
             />
       <Text>Connected sensors</Text>
     </View>
