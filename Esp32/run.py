@@ -1,16 +1,32 @@
 import time
-from hcsr04 import HCSR04
-import homePage
 from machine import Pin
 import gc
-
 try:
   import usocket as socket
 except:
   import socket
 
-def main(): 
+# import firebase_admin
+# from hcsr04 import HCSR04
+# import homePage
+
+import uFirebase
+
+def StartDB():
+    print('Connecting to firebase DB')
+    fb = uFirebase.uFirebase('https://boilercontrol-iot-default-rtdb.europe-west1.firebasedatabase.app/')
+
+    # Caminho no banco de dados 
+    path = 'BoilerControl/'
+
+    # Dado a ser inserido 
+    data = {
+        'greeting': 'Hello from ESP!'
+    }
     
+    fb.put(path, data)
+
+def led_control():  
     # set pins
     led = Pin(12, Pin.OUT)
     led.value(1)
@@ -66,3 +82,5 @@ def main():
             conn.close()
             print('Connection closed')
 
+def main(): 
+    StartDB()

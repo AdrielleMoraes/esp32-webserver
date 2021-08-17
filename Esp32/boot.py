@@ -17,7 +17,8 @@ if wlan is None:
 # Main Code goes here, wlan is a working network.WLAN(STA_IF) instance.
 print("ESP OK")
 
-print("Starting Server...")
+# connect to database
 run.main()
+
 
 
