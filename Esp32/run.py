@@ -10,21 +10,12 @@ except:
 # from hcsr04 import HCSR04
 # import homePage
 
-import uFirebase
+import ufirebase
 
 def StartDB():
     print('Connecting to firebase DB')
-    fb = uFirebase.uFirebase('https://boilercontrol-iot-default-rtdb.europe-west1.firebasedatabase.app/')
-
-    # Caminho no banco de dados 
-    path = 'BoilerControl/'
-
-    # Dado a ser inserido 
-    data = {
-        'greeting': 'Hello from ESP!'
-    }
-    
-    fb.put(path, data)
+    fb = ufirebase.get('https://boilercontrol-iot-default-rtdb.europe-west1.firebasedatabase.app/esp32/Name.json')
+    print(fb)
 
 def led_control():  
     # set pins
