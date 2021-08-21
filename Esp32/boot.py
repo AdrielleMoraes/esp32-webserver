@@ -14,9 +14,6 @@ if wlan is None:
     while True:
         pass  # you shall not pass :D
 
-# Main Code goes here, wlan is a working network.WLAN(STA_IF) instance.
-print("ESP OK")
-
 # connect to database
 run.main()
 
