@@ -1,6 +1,7 @@
 config.py
 .venv
 
+firebase_ServiceAccountKey.json
 settings.py
 
 # OSX

@@ -9,6 +9,8 @@ except:
 # from hcsr04 import HCSR04
 # import homePage
 
+# todo 
+# Communication between database and device (what is going to trigger events?)
 import ufirebase
 
 def StartDB():
