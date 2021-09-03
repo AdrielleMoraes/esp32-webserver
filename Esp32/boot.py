@@ -1,6 +1,6 @@
 import wifimgr # wifi manager to handle wifi connectivity
 from time import sleep
-import run
+# import run
 
 try:
   import usocket as socket
@@ -14,8 +14,9 @@ if wlan is None:
     while True:
         pass  # you shall not pass :D
 
+print('Connected to the internet!')
 # connect to database
-run.main()
+#run.main()
 
 
 

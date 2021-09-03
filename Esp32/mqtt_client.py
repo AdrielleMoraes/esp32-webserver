@@ -7,6 +7,9 @@ def on_connect(client, userdata, flags, rc):
     else:
         print("Connect returned result code: " + str(rc))
 
+    # subscribe to the topic "my/test/topic"
+    client.subscribe("my/test/topic")
+
 # The callback for when a PUBLISH message is received from the server.
 def on_message(client, userdata, msg):
     print("Received message: " + msg.topic + " -> " + msg.payload.decode("utf-8"))
@@ -25,11 +28,10 @@ client.username_pw_set("home-device", "adminWater1")
 # connect to HiveMQ Cloud on port 8883
 client.connect("71ebae37c6944ff5b3f00e4b4dbf707e.s1.eu.hivemq.cloud", 8883)
 
+
+
 # subscribe to the topic "my/test/topic"
 client.subscribe("my/test/topic")
-
-# publish "Hello" to the topic "my/test/topic"
-client.publish("my/test/topic", "Hello")
 
 # Blocking call that processes network traffic, dispatches callbacks and handles reconnecting.
 client.loop_forever()
