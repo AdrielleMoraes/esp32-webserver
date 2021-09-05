@@ -1,27 +1,46 @@
-from mqtt_client import MQTTClient 
 import ubinascii
 import config
 import machine 
 import time 
+from umqtt.robust import MQTTClient
  
-def sub_cb(topic, msg): 
-   print(msg) 
- 
+
 MQTT_USERNAME = config.MQTT_USERNAME
 MQTT_API = config.MQTT_API
 MQTT_FEED = config.MQTT_FEED
+MQTT_BROKER = "io.adafruit.com"
 CLIENT_ID = ubinascii.hexlify(machine.unique_id()) 
+MQTT_TOPIC = config.MQTT_TOPIC
 
-client = MQTTClient(CLIENT_ID, "io.adafruit.com",user=MQTT_USERNAME, password=MQTT_API, port=1883) 
-client.set_callback(sub_cb) 
-client.connect()
-client.subscribe(topic=MQTT_USERNAME+"/Feeds/"+MQTT_FEED) 
-print("Connected to the MQTT broker")
+led_state = machine.Pin(2, machine.Pin.OUT)
+led_connected = machine.Pin(13, machine.Pin.OUT)
+led_connected.value(0)
+
+def sub_cb(topic, msg): 
+  print(msg) 
+  if msg == b'0':
+    led_state.value(0)
+  if msg == b'1':
+    led_state.value(1)
+
+print("Trying to connect to mqtt broker.")
+try:
+  client = MQTTClient(CLIENT_ID, MQTT_BROKER,user=MQTT_USERNAME, password=MQTT_API, port=1883) 
+  client.DEBUG = True
+  client.set_callback(sub_cb) 
+
+  if not client.connect(clean_session=False):
+    print("New session being set up")
+    client.subscribe(topic=MQTT_TOPIC) 
+    led_connected.value(1)
+
+except:
+  print('Failed to connect to MQTT broker. Reconnecting...')
+  led_connected.value(0)
+  time.sleep(5)
+  machine.reset()
 
 while True: 
-    print("Sending ON") 
-    # client.publish(topic=MQTT_USERNAME+"/feeds/"+MQTT_FEED, msg="1")
-    # time.sleep(5) 
-    # print("Sending OFF") 
-    # client.publish(topic=MQTT_USERNAME+"/feeds/"+MQTT_FEED, msg="0")
-    # time.sleep(5) 
+    print('Welcome')
+    resp = client.check_msg()   
+    time.sleep(1)
