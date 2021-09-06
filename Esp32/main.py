@@ -8,7 +8,7 @@ from umqtt.robust import MQTTClient
 MQTT_USERNAME = config.MQTT_USERNAME
 MQTT_API = config.MQTT_API
 MQTT_FEED = config.MQTT_FEED
-MQTT_BROKER = "io.adafruit.com"
+MQTT_BROKER = config.MQTT_BROKER
 CLIENT_ID = ubinascii.hexlify(machine.unique_id()) 
 MQTT_TOPIC = config.MQTT_TOPIC
 
@@ -23,6 +23,12 @@ def sub_cb(topic, msg):
   if msg == b'1':
     led_state.value(1)
 
+def reset_and_reconnect():
+  print('Failed to connect to MQTT broker. Reconnecting...')
+  led_connected.value(0)
+  time.sleep(5)
+  machine.reset()
+
 print("Trying to connect to mqtt broker.")
 try:
   client = MQTTClient(CLIENT_ID, MQTT_BROKER,user=MQTT_USERNAME, password=MQTT_API, port=1883) 
@@ -32,15 +38,13 @@ try:
   if not client.connect(clean_session=False):
     print("New session being set up")
     client.subscribe(topic=MQTT_TOPIC) 
-    led_connected.value(1)
 
 except:
-  print('Failed to connect to MQTT broker. Reconnecting...')
-  led_connected.value(0)
-  time.sleep(5)
-  machine.reset()
+  reset_and_reconnect()
+
+
+led_connected.value(1)
 
 while True: 
-    print('Welcome')
-    resp = client.check_msg()   
-    time.sleep(1)
+  client.check_msg()
+  time.sleep(1)
