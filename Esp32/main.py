@@ -46,5 +46,6 @@ except:
 led_connected.value(1)
 
 while True: 
+  # correct erroe 23
   client.check_msg()
   time.sleep(1)
