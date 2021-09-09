@@ -87,7 +87,6 @@ class MQTTClient:
         if resp[3] != 0:
             #raise MQTTException(resp[3])
             print('Failed to connect to MQTT broker. Reconnecting...')
-            time.sleep(10)
             machine.reset()
         return resp[2] & 1
 
