@@ -1,6 +1,7 @@
 import React from 'react';
 import {View, Text, Button} from 'react-native';
 import {Avatar} from 'react-native-elements';
+import HookMqtt from '../MQTT/MQTT_client'
 
 const ProfileScreen = ({navigation, route}) => {
   return (
@@ -13,6 +14,9 @@ const ProfileScreen = ({navigation, route}) => {
         overlayContainerStyle={{backgroundColor: 'green'}}
       />
       <Text>This is {route.params.name}'s profile</Text>
+      
+      <HookMqtt/>
+      
       <Button
               title="Sensor"
               onPress={() => navigation.navigate('Sensor', {name: 'Esp32'})}
