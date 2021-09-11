@@ -4,6 +4,8 @@ import Publisher from './Publisher';
 import Subscriber from './Subscriber';
 import Receiver from './Receiver';
 import mqtt from 'mqtt';
+import {View, Button, Text} from 'react-native'
+
 
 const HookMqtt = () => {
   const [client, setClient] = useState(null);
@@ -11,9 +13,9 @@ const HookMqtt = () => {
   const [payload, setPayload] = useState({});
   const [connectStatus, setConnectStatus] = useState('Connect');
 
-  const mqttConnect = (host, mqttOption) => {
+  const mqttConnect = (mqttOption) => {
     setConnectStatus('Connecting');
-    setClient(mqtt.connect(host, mqttOption));
+    setClient(mqtt.connect(mqttOption));
   };
 
   useEffect(() => {
@@ -82,7 +84,7 @@ const HookMqtt = () => {
 
   return (
     <View>
-        {/* <Connection connect={mqttConnect} disconnect={mqttDisconnect} connectBtn={connectStatus} /> */}
+        <Connection connect={mqttConnect} disconnect={mqttDisconnect} connectBtn={connectStatus} />
         {/* <Subscriber sub={mqttSub} unSub={mqttUnSub} showUnsub={isSubed} />
         <Publisher publish={mqttPublish} />
         <Receiver payload={payload}/> */}

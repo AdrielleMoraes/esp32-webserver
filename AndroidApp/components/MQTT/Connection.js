@@ -12,7 +12,6 @@ const Connection = ({ connect, disconnect, connectBtn }) => {
   };
 
   const handleConnect = () => {
-    const url = `ws://${host}:${port}/mqtt`;
     const options = {
       keepalive: 30,
       protocolId: 'MQTT',
@@ -31,7 +30,7 @@ const Connection = ({ connect, disconnect, connectBtn }) => {
     options.clientId = record.clientId;
     options.username = record.username;
     options.password = record.password;
-    connect(url, options);
+    connect(options);
   };
 
   const handleDisconnect = () => {
