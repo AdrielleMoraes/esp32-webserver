@@ -5078,7 +5078,7 @@
   "resolved" "https://registry.npmjs.org/mockdate/-/mockdate-3.0.5.tgz"
   "version" "3.0.5"
 
-"mqtt-packet@^6.8.0":
+"mqtt-packet@^6.10.0", "mqtt-packet@^6.8.0":
   "integrity" "sha512-ja8+mFKIHdB1Tpl6vac+sktqy3gA8t9Mduom1BA75cI+R9AHnZOiaBQwpGiWnaVJLDGRdNhQmFaAqd7tkKSMGA=="
   "resolved" "https://registry.npmjs.org/mqtt-packet/-/mqtt-packet-6.10.0.tgz"
   "version" "6.10.0"

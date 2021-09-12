@@ -13,9 +13,9 @@ const HookMqtt = () => {
   const [payload, setPayload] = useState({});
   const [connectStatus, setConnectStatus] = useState('Connect');
 
-  const mqttConnect = (mqttOption) => {
+  const mqttConnect = (host, mqttOption) => {
     setConnectStatus('Connecting');
-    setClient(mqtt.connect(mqttOption));
+    setClient(mqtt.connect(host, mqttOption));
   };
 
   useEffect(() => {
