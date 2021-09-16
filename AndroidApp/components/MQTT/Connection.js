@@ -11,6 +11,7 @@ const Connection = ({ connect, disconnect, connectBtn }) => {
     port: 8083,
   };
 
+  // change this
   const handleConnect = () => {
       const host = 'mqtt://'+MQTT_BROKER+':1883/mqtt'
     const options = {
