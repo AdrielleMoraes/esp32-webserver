@@ -13,7 +13,7 @@ const Connection = ({ connect, disconnect, connectBtn }) => {
 
   // change this
   const handleConnect = () => {
-      const host = 'mqtt://'+MQTT_BROKER+':'+record.port+'/mqtt'
+      const host = 'mqtt://'+MQTT_BROKER+':'+record.port+'/mqtt' //dont use this is wrongs
     const options = {
       keepalive: 30,
       protocolId: 'MQTT',
