@@ -1,5 +1,6 @@
 config.py
 .venv
+.vscode
 
 firebase_ServiceAccountKey.json
 settings.py
