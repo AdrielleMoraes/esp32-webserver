@@ -1,13 +1,15 @@
 from paho.mqtt import client as mqtt_client 
-import json   
+import random  
+import time
 
-broker = 'iot.reyax.com'
-port = 1883 
-topic = "api/request" 
-topic_sub = "api/notification/37/#" # generate client ID with pub prefix randomly 
-client_id = 'your client id' 
-username = 'your username' 
-password = 'your password' 
+
+MQTT_TOPIC_STATE = MQTT_USERNAME+"/feeds/boiler-control"
+MQTT_TOPIC_TEMP = MQTT_USERNAME+"/feeds/temperature"
+MQTT_BROKER = "io.adafruit.com"
+MQTT_PORT = 1883
+
+client_id = f'python-mqtt-{random.randint(0, 1000)}' 
+
 deviceId = "your deviceId"   
 
 def connect_mqtt():     
@@ -18,35 +20,31 @@ def connect_mqtt():
             print("Failed to connect, return code %d", rc)
             
     client = mqtt_client.Client(client_id)
-    client.username_pw_set(username, password)     
+    client.username_pw_set(MQTT_USERNAME, MQTT_API)     
     client.on_connect = on_connect     
-    client.connect(broker, port)     
+    client.connect(MQTT_BROKER, MQTT_PORT)     
     return client   
-    
-
-def publish(client, status):     
-    msg = "{\"action\":\"command/insert\",\"deviceId\":\""+deviceId+"\",\"command\":{\"command\":\"LED_control\",\"parameters\":{\"led\":\""+status+"\"}}}"     
-    result = client.publish(msg,topic)     
-    msg_status = result[0]     
-    if msg_status ==0:         
-        print(f"message : {msg} sent to topic {topic}")     
-    else:         
-        print(f"Failed to send message to topic {topic}")     
+      
         
-def subscribe(client: mqtt_client):     
-    def on_message(client, userdata, msg):         
-        #print(f"Recieved '{msg.payload.decode()}' from '{msg.topic}' topic")         
-        y = json.loads(msg.payload.decode())         
-        temp = y["notification"]["parameters"]["temp"]         
-        hum = y["notification"]["parameters"]["humi"]         
-        print("temperature: ",temp,", humidity:",hum)           
-        client.subscribe(topic_sub)     
-        client.on_message = on_message   
+def publish(client):
+    msg_count = 0
+    while True:
+        time.sleep(1)
+        msg = f"messages: {msg_count}"
+        result = client.publish(MQTT_TOPIC_STATE, msg)
+        # result: [0, 1]
+        status = result[0]
+        if status == 0:
+            print(f"Send `{msg}` to topic `{MQTT_TOPIC_STATE}`")
+        else:
+            print(f"Failed to send message to topic {MQTT_TOPIC_STATE}")
+        msg_count += 1
         
 def main():     
     client = connect_mqtt()     
-    subscribe(client)       
-    client.loop_forever()   
+    client.loop_start()
+    publish(client)   
+ 
     
 if __name__ == '__main__':     
     main()
