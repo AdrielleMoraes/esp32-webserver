@@ -3,14 +3,10 @@ import random
 import time
 
 
-MQTT_TOPIC_STATE = MQTT_USERNAME+"/feeds/boiler-control"
-MQTT_TOPIC_TEMP = MQTT_USERNAME+"/feeds/temperature"
-MQTT_BROKER = "io.adafruit.com"
-MQTT_PORT = 1883
 
 client_id = f'python-mqtt-{random.randint(0, 1000)}' 
 
-deviceId = "your deviceId"   
+deviceId = "deviceId"   
 
 def connect_mqtt():     
     def on_connect(client, userdata, flags, rc):
@@ -40,10 +36,21 @@ def publish(client):
             print(f"Failed to send message to topic {MQTT_TOPIC_STATE}")
         msg_count += 1
         
+def subscribe(client: mqtt_client):
+    def on_message(client, userdata, msg):
+        print(f"Received `{msg.payload.decode()}` from `{msg.topic}` topic")
+
+    client.subscribe(MQTT_TOPIC_TEMP)
+    client.on_message = on_message
+
+
 def main():     
     client = connect_mqtt()     
-    client.loop_start()
-    publish(client)   
+    # client.loop_start()
+    # publish(client)  
+    subscribe(client)
+    client.loop_forever()
+     
  
     
 if __name__ == '__main__':     
