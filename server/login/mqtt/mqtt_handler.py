@@ -2,9 +2,9 @@ from paho.mqtt import client as mqtt_client
 import random  
 import time
 import secrets
-
+from struct import *
    
-client_id = f'python-mqtt-{random.randint(0, 1000)}'  
+client_id = f'boiler-sensor-{random.randint(0, 1000)}'  
 
 def connect_mqtt(MQTT_USERNAME, MQTT_API, MQTT_BROKER, MQTT_PORT):     
     def on_connect(client, userdata, flags, rc):
@@ -21,18 +21,14 @@ def connect_mqtt(MQTT_USERNAME, MQTT_API, MQTT_BROKER, MQTT_PORT):
     
         
 def publish(client, MQTT_TOPIC):
-    msg_count = 0
-    while True:
-        time.sleep(1)
-        msg = f"messages: {msg_count}"
-        result = client.publish(MQTT_TOPIC, msg)
-        # result: [0, 1]
-        status = result[0]
-        if status == 0:
-            print(f"Send `{msg}` to topic `{MQTT_TOPIC}`")
-        else:
-            print(f"Failed to send message to topic {MQTT_TOPIC}")
-        msg_count += 1
+    msg = "1"
+    result = client.publish(MQTT_TOPIC, payload = msg)
+    # result: [0, 1]
+    status = result[0]
+    if status == 0:
+        print(f"Send `{msg}` to topic `{MQTT_TOPIC}`")
+    else:
+        print(f"Failed to send message to topic {MQTT_TOPIC}")
         
 def subscribe(client: mqtt_client, MQTT_TOPIC):
     def on_message(client, userdata, msg):
@@ -53,7 +49,7 @@ def main():
     client = connect_mqtt(MQTT_USERNAME, MQTT_API,MQTT_BROKER, MQTT_PORT)   
     # client.loop_start()
     publish(client, MQTT_TOPIC_STATE)  
-    # client.subscribe(client, MQTT_TOPIC_TEMP)
+    # subscribe(client, MQTT_TOPIC_TEMP)
     # client.loop_forever()
      
  
