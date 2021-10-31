@@ -4,6 +4,7 @@ import time
 import secrets
 from struct import *
    
+  
 client_id = f'boiler-sensor-{random.randint(0, 1000)}'  
 
 def connect_mqtt(MQTT_USERNAME, MQTT_API, MQTT_BROKER, MQTT_PORT):     
@@ -20,21 +21,21 @@ def connect_mqtt(MQTT_USERNAME, MQTT_API, MQTT_BROKER, MQTT_PORT):
     return client   
     
         
-def publish(client, MQTT_TOPIC):
-    msg = "1"
-    result = client.publish(MQTT_TOPIC, payload = msg)
+def publish(client, feed_user, feed_id):
+    msg = 1
+    result = client.publish('{0}/feeds/{1}'.format(feed_user, feed_id), payload = msg)
     # result: [0, 1]
     status = result[0]
     if status == 0:
-        print(f"Send `{msg}` to topic `{MQTT_TOPIC}`")
+        print(f"Send `{msg}` to topic `{'{0}/feeds/{1}'.format(feed_user, feed_id)}`")
     else:
-        print(f"Failed to send message to topic {MQTT_TOPIC}")
+        print(f"Failed to send message to topic {'{0}/feeds/{1}'.format(feed_user, feed_id)}")
         
-def subscribe(client: mqtt_client, MQTT_TOPIC):
+def subscribe(client: mqtt_client, feed_user, feed_id):
     def on_message(client, userdata, msg):
         print(f"Received `{msg.payload.decode()}` from `{msg.topic}` topic")
 
-    client.subscribe(MQTT_TOPIC)
+    client.subscribe('{0}/feeds/{1}'.format(feed_user, feed_id))
     client.on_message = on_message
 
 
@@ -48,12 +49,11 @@ def main():
 
     client = connect_mqtt(MQTT_USERNAME, MQTT_API,MQTT_BROKER, MQTT_PORT)   
     # client.loop_start()
-    publish(client, MQTT_TOPIC_STATE)  
-    # subscribe(client, MQTT_TOPIC_TEMP)
-    # client.loop_forever()
+    publish(client, MQTT_USERNAME, MQTT_TOPIC_STATE) 
+    # subscribe(client, MQTT_USERNAME,MQTT_TOPIC_TEMP)
+    client.loop_forever()
      
  
     
 if __name__ == '__main__':     
     main()
-
