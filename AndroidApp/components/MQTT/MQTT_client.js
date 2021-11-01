@@ -3,7 +3,7 @@ import Connection from './Connection';
 import Publisher from './Publisher';
 import Subscriber from './Subscriber';
 import Receiver from './Receiver';
-import mqtt from 'mqtt';
+// import mqtt from 'mqtt';
 import {View, Button, Text} from 'react-native'
 
 
@@ -84,7 +84,7 @@ const HookMqtt = () => {
 
   return (
     <View>
-        <Connection connect={mqttConnect} disconnect={mqttDisconnect} connectBtn={connectStatus} />
+        {/* <Connection connect={mqttConnect} disconnect={mqttDisconnect} connectBtn={connectStatus} /> */}
         {/* <Subscriber sub={mqttSub} unSub={mqttUnSub} showUnsub={isSubed} />
         <Publisher publish={mqttPublish} />
         <Receiver payload={payload}/> */}
