@@ -8,12 +8,13 @@ const Connection = ({ connect, disconnect, connectBtn }) => {
     clientId: `mqttjs_ + ${Math.random().toString(16).substr(2, 8)}`,
     username: MQTT_USERNAME,
     password: MQTT_API,
-    port: 8083, //or 1883
+    port: 1883, //or 1883
   };
 
   // change this
   const handleConnect = () => {
-    const host = 'mqtts://'+record.username+':'+record.password+'@' + record.MQTT_BROKER
+    console.log("hi");
+    const host = `ws://${record.host}:${record.port}/mqtt`
     const options = {
       keepalive: 30,
       protocolId: 'MQTT',
@@ -41,9 +42,8 @@ const Connection = ({ connect, disconnect, connectBtn }) => {
 
   return (
     <View>
-        <Text>{connectBtn}</Text>
-        <Button title='Connect' onClick={handleConnect}>Connect</Button>
-        <Button title='Disconnect' onClick={handleDisconnect}>Disconnect</Button>
+        <Button title={connectBtn} onPress={handleConnect}/>
+        <Button title='Disconnect' onPress={handleDisconnect}/>
     </View>
   );
 }
