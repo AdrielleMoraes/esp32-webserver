@@ -42,8 +42,8 @@ const Connection = ({ connect, disconnect, connectBtn }) => {
   return (
     <View>
         <Text>{connectBtn}</Text>
-        <Button title='Connect' onPress={handleConnect}/>
-        <Button title='Disconnect' onClick={handleDisconnect}/>
+        <Button title='Connect' onClick={handleConnect}>Connect</Button>
+        <Button title='Disconnect' onClick={handleDisconnect}>Disconnect</Button>
     </View>
   );
 }
