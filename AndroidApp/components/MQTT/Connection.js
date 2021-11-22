@@ -1,4 +1,5 @@
 import React from 'react';
+import mqtt from 'mqtt';
 import {View, Button, Text} from 'react-native'
 import {MQTT_BROKER, MQTT_USERNAME, MQTT_API} from '@env'
 
@@ -14,7 +15,7 @@ const Connection = ({ connect, disconnect, connectBtn }) => {
   // change this
   const handleConnect = () => {
     console.log("hi");
-    const host = `ws://${record.host}:${record.port}/mqtt`
+    const host = `mqtt://${record.host}:1883`
     const options = {
       keepalive: 30,
       protocolId: 'MQTT',
