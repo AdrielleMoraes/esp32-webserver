@@ -1,7 +1,6 @@
 import React, { useContext } from 'react';
 
 const Publisher = ({ publish }) => {
-  const [form] = Form.useForm();
   const qosOptions = useContext(QosOption);
 
   const record = {
