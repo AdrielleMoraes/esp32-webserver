@@ -89,7 +89,7 @@ const HookMqtt = () => {
     <View>
         <Connection connect={mqttConnect} disconnect={mqttDisconnect} connectBtn={connectStatus} />
         <Subscriber sub={mqttSub} unSub={mqttUnSub} showUnsub={isSubed} />
-        <Publisher publish={mqttPublish} />
+        {/* <Publisher publish={mqttPublish} /> */}
         <Receiver payload={payload}/>
     </View>
   );
