@@ -1,5 +1,7 @@
 <resources>
     <string name="app_name">BoilerControlApp</string>
-    <string name="edit_message">Enter a message</string>
-    <string name="button_send">Send</string>
+    <string name="editFirstName">First Name</string>
+    <string name="editLastName">Last Name</string>
+    <string name="editEmail">Email</string>
+    <string name="btnRegister">Register</string>
 </resources>
