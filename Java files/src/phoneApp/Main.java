@@ -1,4 +1,4 @@
-package org.meicode.helloworld;
+package phoneApp;
 
 import java.util.Scanner;
 

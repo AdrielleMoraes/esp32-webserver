@@ -1,5 +1,7 @@
 package org.meicode.helloworld;
 
+import org.meicode.helloworld.*;
+
 import java.util.Random;
 import java.util.Scanner;
 
