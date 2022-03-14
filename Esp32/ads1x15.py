@@ -80,7 +80,7 @@ _DIFFS = {
 
 
 class ADS1115:
-    def __init__(self, i2c, address=0x49):
+    def __init__(self, i2c, address=0x48):
         self.i2c = i2c
         self.address = address
         self.gain = 0 # 2/3 6.144V
