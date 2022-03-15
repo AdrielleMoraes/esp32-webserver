@@ -23,7 +23,3 @@ while True:
             print(adc.read(0))
     except :
         print('Error retrieving data from sensor:')
-
-# start mqtt server
-# read data from sensors
-# send data from sensors to mqtt server
