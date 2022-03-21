@@ -26,6 +26,10 @@ public class Main {
          *
           */
 
+        // create new messages and contact manager
+        MessageManager messagesManager = new MessageManager();
+        ContactsManager contactsManager = new ContactsManager();
+
         // Greet the user
         System.out.println("Hello, Welcome!");
 
@@ -33,9 +37,11 @@ public class Main {
             switch (menuOptions()){
                 case 1:
                     System.out.println("Managing Contacts");
+                    contactsManager.selectOption();
                     break;
                 case 2:
                     System.out.println("Messages box");
+                    messagesManager.selectOption();
                     break;
                 default:
                     isAlive = false;
