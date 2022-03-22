@@ -37,11 +37,11 @@ public class Main {
             switch (menuOptions()){
                 case 1:
                     System.out.println("Managing Contacts");
-                    contactsManager.selectOption();
+                    contactsManager.showMenu();
                     break;
                 case 2:
                     System.out.println("Messages box");
-                    messagesManager.selectOption();
+                    messagesManager.showMenu();
                     break;
                 default:
                     isAlive = false;

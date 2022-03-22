@@ -10,6 +10,10 @@ public class Contact {
         this.number = number;
     }
 
+    public String getName() {
+        return name;
+    }
+
     public void printDetails(){
         System.out.println(name);
         System.out.println(number);
