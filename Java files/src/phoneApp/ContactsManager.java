@@ -7,6 +7,7 @@ public class ContactsManager {
 
     ArrayList<Contact> contacts;
     Scanner scanner;
+    boolean showingMenu = true;
 // do singleton instance here to guarantee there is only on instance of the contacts manager
     public ContactsManager(){
         contacts = new ArrayList<Contact>();
@@ -16,28 +17,31 @@ public class ContactsManager {
 
     public void showMenu(){
 
-        System.out.println("1 . Show all contacts");
-        System.out.println("2. Add a new contact");
-        System.out.println("3. Search for a contact");
-        System.out.println("4. Delete a contact");
-        System.out.println("5. Go back to previous menu");
+        while(showingMenu){
+            System.out.println("1 . Show all contacts");
+            System.out.println("2. Add a new contact");
+            System.out.println("3. Search for a contact");
+            System.out.println("4. Delete a contact");
+            System.out.println("5. Go back to previous menu");
 
-        int op = scanner.nextInt();
-        switch (op){
-            case 1:
-                showContacts();
-                break;
-            case 2:
-                addContact();
-                break;
-            case 3:
-                searchContact(new Contact("Myself", 1234));
-                break;
-            case 4:
-
-                break;
-            default:
-                break;
+            int op = scanner.nextInt();
+            switch (op) {
+                case 1:
+                    showContacts();
+                    break;
+                case 2:
+                    addContact();
+                    break;
+                case 3:
+                    searchContact(new Contact("Myself", 1234));
+                    break;
+                case 4:
+                    deleteContact(new Contact("Myself", 1234));
+                    break;
+                default:
+                    showingMenu = false;
+                    break;
+            }
         }
 
     }
@@ -45,6 +49,7 @@ public class ContactsManager {
     private void addContact(){
         Contact newContact = new Contact("default", 12345);
         contacts.add(newContact);
+        System.out.println(String.format("New contact {0} was added", newContact.getName()));
     }
 
     private boolean searchContact(Contact contact){
@@ -62,7 +67,7 @@ public class ContactsManager {
         // check first if contact is in the list
         if(searchContact(contact)){
             contacts.remove(contact);
-            System.out.println(String.format("{} was successfully removed from your phone", contact.getName()));
+            System.out.println(String.format("{0} was successfully removed from your phone", contact.getName()));
             return;
         }
         System.out.println(String.format("Contact not in the list", contact.getName()));
