@@ -15,7 +15,6 @@ public class Contact {
     }
 
     public void printDetails(){
-        System.out.println(name);
-        System.out.println(number);
+        System.out.println(String.format("Name: %s - Number: %d", name,number));
     }
 }
