@@ -6,25 +6,25 @@ import java.util.Scanner;
 public class MessageManager {
 
     ArrayList<Message> messages;
+    ContactsManager contacts;
     /*
          *      1. See the list of all messages
          *      2. Send a new message
          *      3. Go back to previous menu
      */
 
-    // do singleton instance here to guarantee there is only on instance of the contacts manager
     // create a list with all messages on constructor
     public MessageManager(){
-        messages = new ArrayList<Message>(); // Create an ArrayList object
-
-        // add a few messages to the list
-        messages.add(new Message("Hello World", new Contact("User", 123456789), "Received"));
+        messages = new ArrayList<>();
     }
 
-    public void showMenu(){
-
+    public void showMenu(ContactsManager contacts){
+        this.contacts = contacts;
         Scanner scanner = new Scanner(System.in);
-
+        if(contacts.contactsSize() <= 0){
+            System.out.println("No contacts in this phone");
+            return;
+        }
         System.out.println("1 . See list of all messages");
         System.out.println("2. Send a new Message");
         System.out.println("3. Go back to previous menu");
@@ -34,9 +34,11 @@ public class MessageManager {
         switch (option){
             case 1:
                 printMessages();
+                showMenu(contacts);
                 break;
             case 2:
                 sendMessage();
+                showMenu(contacts);
                 break;
             default:
                 break;
@@ -45,16 +47,24 @@ public class MessageManager {
 
     public void printMessages(){
         messages.forEach((message) -> message.printMessage());
-        showMenu();
     }
 
     public void sendMessage(){
+
+        Scanner scanner = new Scanner(System.in).useDelimiter("\n");
+        System.out.println("Select Contact to send message to: ");
+
+        String recipient_name = scanner.next();
+        Contact recipient = contacts.searchContact(recipient_name);
+        if ( recipient == null) {
+            System.out.println("Contact not in the list");
+            return;
+        }
         System.out.println("Please type text body");
-        Scanner scanner = new Scanner(System.in);
 
         String msg = scanner.next();
+        Message newMessage = new Message(msg, recipient);
 
-        System.out.println("Select Contact to send message to: ");
-        showMenu();
+        messages.add(newMessage);
     }
 }

@@ -41,7 +41,7 @@ public class Main {
                     break;
                 case 2:
                     System.out.println("Messages box");
-                    messagesManager.showMenu();
+                    messagesManager.showMenu(contactsManager);
                     break;
                 default:
                     isAlive = false;

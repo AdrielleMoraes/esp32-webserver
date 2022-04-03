@@ -1,9 +1,12 @@
 package phoneApp;
 
+import java.util.ArrayList;
+
 public class Contact {
 
     private String name;
     private int number;
+
 
     public Contact(String name, int number){
         this.name = name;
@@ -17,4 +20,5 @@ public class Contact {
     public void printDetails(){
         System.out.println(String.format("Name: %s - Number: %d", name,number));
     }
+
 }

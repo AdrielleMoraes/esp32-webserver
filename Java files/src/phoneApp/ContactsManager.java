@@ -32,7 +32,13 @@ public class ContactsManager {
                 break;
             case 3:
                 String contact_name = getNameInput();
-                searchContact(contact_name);
+                Contact c = searchContact(contact_name);
+                if(c == null){
+                    System.out.println("Could not find this contact");
+                }
+                else
+                    c.printDetails();
+
                 showMenu();
                 break;
             case 4:
@@ -69,20 +75,12 @@ public class ContactsManager {
         System.out.println(String.format("New contact %s was added", newContact.getName()));
     }
 
-    private Contact searchContact(String contact_name){
+    public Contact searchContact(String contact_name){
         Contact result = contacts.stream()
                 .filter(contact -> contact_name.equals(contact.getName()))
                 .findAny()
                 .orElse(null);
-
-        if (result != null){
-            System.out.println("Found Contact");
-            result.printDetails();
-            return result;
-        }
-        else
-            System.out.println("Contact not in the list");
-        return null;
+        return result;
     }
 
     private void deleteContact(){
@@ -101,5 +99,10 @@ public class ContactsManager {
     public void showContacts(){
         System.out.println("Contacts in phone: ");
         contacts.forEach(contact -> contact.printDetails());
+        System.out.println("--------");
+    }
+
+    public int contactsSize(){
+        return contacts.size();
     }
 }

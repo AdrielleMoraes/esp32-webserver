@@ -3,15 +3,13 @@ package phoneApp;
 public class Message {
 
     private String bodyMessage;
-    private Contact sender;
-    private String messageType;
-    public Message(String message, Contact sender, String type){
-        this.bodyMessage = message;
-        this.sender = sender;
-        this.messageType = type;
-    }
+    private Contact recipient;
 
+    public Message(String message, Contact recipient){
+        this.bodyMessage = message;
+        this.recipient = recipient;
+    }
     public void printMessage(){
-        System.out.println(bodyMessage);
+        System.out.println(String.format("Message from: %s\n%s", recipient.getName(),bodyMessage));
     }
 }
