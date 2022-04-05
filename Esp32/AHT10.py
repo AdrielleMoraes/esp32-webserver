@@ -1,5 +1,7 @@
 import time
 from math import log
+from machine import I2C
+from machine import Pin
 
 
 #CONSTANTS
@@ -58,3 +60,31 @@ class AHT10:
         self.mode = 0
         h = (log(h, 10) - 2) / 0.4343 + (17.62 * t) / (243.12 + t)
         return 243.12 * h / (17.62 - h)
+
+
+
+
+class readSensor:
+    def __init__(self, slc_pin = 22, sda_pin =21):
+        i2c = I2C(scl =Pin(slc_pin) , sda = Pin(sda_pin), freq=400000)
+
+        # use below for the aht10 sensor
+        self.aht10_sensor = AHT10(i2c, 0)
+
+    def readTemp(self):
+        value = 0
+        # print data on screen
+        try:   
+            value = self.aht10_sensor.temperature()
+            return value
+        except:
+            print('Error retrieving temperature from sensor')
+    
+    def readHumidity(self):
+        value = 0
+        # print data on screen
+        try:   
+            value = self.aht10_sensor.humidity()
+            return value
+        except:
+            print('Error retrieving humidity from sensor')

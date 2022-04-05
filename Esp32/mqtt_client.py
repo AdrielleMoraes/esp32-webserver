@@ -197,16 +197,19 @@ class MQTTClient:
         self.sock.setblocking(False)
         return self.wait_msg()
 
-    
+
+"""
+Class to run all MQTT features:
+    - connect to a server
+    - subscribe
+    - publish
+    - reset
+"""    
 class MQTTRunner():
         
-    def __init__(self, ledState=2, ledConnected=13):
-        self.led_state = machine.Pin(ledState, machine.Pin.OUT)
+    def __init__(self, ledConnected=2):
         self.led_connected = machine.Pin(ledConnected, machine.Pin.OUT)
         self.led_connected.value(0)
-        
-        self.last_message = 0
-        self.message_interval = 2
 
     def sub_cb(self, topic, msg): 
         print(msg) 
@@ -218,38 +221,34 @@ class MQTTRunner():
     def reset_and_reconnect(self):
         print('Failed to connect to MQTT broker. Restarting...')
         self.led_connected.value(0)
-        time.sleep(5)
+        time.sleep(3)
         machine.reset()
     
-    def start(self):
+    def connect(self):
         CLIENT_ID = hexlify(machine.unique_id()) 
-
-        MQTT_TOPIC_TEMP = config.MQTT_TOPIC_TEMP
         MQTT_TOPIC_STATE = config.MQTT_TOPIC_STATE
         print("Trying to connect to mqtt broker.")
         try:
-            client = MQTTClient(CLIENT_ID, config.MQTT_BROKER,user=config.MQTT_USERNAME, password=config.MQTT_API, port=1883) 
-            client.DEBUG = True
-            client.set_callback(self.sub_cb) 
+            self.client = MQTTClient(CLIENT_ID, config.MQTT_BROKER,user=config.MQTT_USERNAME, password=config.MQTT_API, port=1883) 
+            self.client.DEBUG = True
+            self.client.set_callback(self.sub_cb) 
 
-            if not client.connect(clean_session=False):
+            if not self.client.connect(clean_session=False):
                 print("New session being set up")
-                client.subscribe(topic=MQTT_TOPIC_STATE) 
+                self.client.subscribe(topic=MQTT_TOPIC_STATE) 
         except:
             self.reset_and_reconnect()
 
         # connected succesfully
         self.led_connected.value(1)
 
-        # send message to server
-        while True: 
-            try:   
-                if (time.time() - self.last_message) > self.message_interval:
-                    resp = client.check_msg()
-                    msg = str(randint(0,100))
-                    client.publish(MQTT_TOPIC_TEMP, msg)
-                    last_message = time.time()
-                    print(resp)
-            except OSError as e:
-                print('From main loop:')
-                self.reset_and_reconnect()
+    # send message to server
+    def publish(self, value=0):
+        MQTT_TOPIC_TEMP = config.MQTT_TOPIC_TEMP
+        try:   
+            resp = self.client.check_msg()
+            msg = str(value)
+            self.client.publish(MQTT_TOPIC_TEMP, msg)
+        except OSError as e:
+            print('Could not publish message')
+            self.reset_and_reconnect()

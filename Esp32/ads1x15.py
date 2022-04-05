@@ -1,6 +1,12 @@
 import ustruct
 import time
 
+"""
+AD converter
+
+check if address is correct if you get any errors 
+
+"""
 
 _REGISTER_MASK = const(0x03)
 _REGISTER_CONVERT = const(0x00)
