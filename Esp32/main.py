@@ -4,7 +4,7 @@ from mqtt_client import MQTTRunner
 
 # Frequency of readings
 last_message = 0
-message_interval = 20 # every one second
+message_interval = 300 # every 5min
 
 
 # start mqtt server
