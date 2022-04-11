@@ -18,7 +18,5 @@ if wlan is None:
         pass  # you shall not pass :D
 print('Connected to the internet!')
 
-
-
-
+# follow to the main.py script...
 
