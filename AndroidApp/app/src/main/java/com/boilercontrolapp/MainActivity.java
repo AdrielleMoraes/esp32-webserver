@@ -10,11 +10,14 @@ import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener{
 
+    private EditText accountName;
     public void onClick(View v){
         switch (v.getId()){
             case R.id.btnLogin:
-                Toast.makeText(this, "Hello Button", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, accountName.getText().toString(), Toast.LENGTH_SHORT).show();
                 break;
+            case R.id.accountEditTxt:
+//                Toast.makeText(this, "Editing...", Toast.LENGTH_SHORT).show();
             default:
                 break;
         }
@@ -24,8 +27,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Button loginBtn = findViewById(R.id.btnLogin);
-
+        accountName = findViewById(R.id.accountEditTxt);
         loginBtn.setOnClickListener(this);
+        accountName.setOnClickListener(this);
     }
 
     //method called when button is pressed
