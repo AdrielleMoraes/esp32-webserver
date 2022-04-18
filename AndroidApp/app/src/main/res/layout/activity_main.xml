@@ -15,6 +15,16 @@
         android:hint="@string/editAccountName"
         android:inputType="textEmailAddress"
         />
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/passwordEditTxt"
+        android:layout_centerInParent = "true"
+        android:hint="@string/editPassword"
+        android:inputType="textPassword"
+        android:layout_marginTop="10dp"
+        android:layout_below = "@+id/accountEditTxt"
+        />
 
     <Button
         android:id="@+id/btnLogin"
@@ -23,7 +33,7 @@
         android:text="@string/btnLogin"
         android:layout_centerInParent = "true"
         android:layout_marginTop="20dp"
-        android:layout_below = "@+id/accountEditTxt"
+        android:layout_below = "@+id/passwordEditTxt"
         />
 
 
