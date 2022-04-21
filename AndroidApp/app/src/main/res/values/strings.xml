@@ -3,4 +3,7 @@
     <string name="editAccountName">Account</string>
     <string name="editPassword">Password</string>
     <string name="btnLogin">Login</string>
+    <string name="btnDevices">View devices</string>
+    <string name="btnRoutines">View routines</string>
+    <string name="btnLogout">Logout</string>
 </resources>
