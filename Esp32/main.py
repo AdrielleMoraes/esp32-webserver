@@ -1,3 +1,4 @@
+import config
 from AHT10 import readSensor
 import time
 from mqtt_client import MQTTRunner
@@ -11,6 +12,8 @@ message_interval = 300 # every 5min
 client_mqtt = MQTTRunner()
 client_mqtt.connect()
 
+# send data from sensors to mqtt server
+client_mqtt.publish(topic=config.MQTT_TOPIC_STATE, value = 1)
 
 # start sensor
 sensor = readSensor() # Initialise temperature sensor

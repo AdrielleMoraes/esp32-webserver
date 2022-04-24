@@ -243,12 +243,12 @@ class MQTTRunner():
         self.led_connected.value(1)
 
     # send message to server
-    def publish(self, value=0):
-        MQTT_TOPIC_TEMP = config.MQTT_TOPIC_TEMP
+    def publish(self, topic = config.MQTT_FEED_TEMP, value=0):
+        MQTT_TOPIC = topic
         try:   
             resp = self.client.check_msg()
             msg = str(value)
-            self.client.publish(MQTT_TOPIC_TEMP, msg)
+            self.client.publish(MQTT_TOPIC, msg)
         except OSError as e:
             print('Could not publish message')
             self.reset_and_reconnect()
