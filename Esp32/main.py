@@ -13,7 +13,7 @@ client_mqtt = MQTTRunner()
 client_mqtt.connect()
 
 # send data from sensors to mqtt server
-client_mqtt.publish(topic=config.MQTT_TOPIC_STATE, value = 1)
+# client_mqtt.publish(topic=config.MQTT_TOPIC_STATE, value = 1)
 
 # start sensor
 sensor = readSensor() # Initialise temperature sensor
