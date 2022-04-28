@@ -207,8 +207,10 @@ Class to run all MQTT features:
 """    
 class MQTTRunner():
         
-    def __init__(self, ledConnected=2):
+    def __init__(self, ledConnected=2, ledState=13):
         self.led_connected = machine.Pin(ledConnected, machine.Pin.OUT)
+        self.led_state = machine.Pin(ledState, machine.Pin.OUT)
+        self.led_state.value(0)
         self.led_connected.value(0)
 
     def sub_cb(self, topic, msg): 
